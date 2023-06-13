@@ -1,9 +1,8 @@
-<div class="hstack w-100" x-data="Controller">
-    <div class="card w-100">
+<div class="hstack w-100 m-0" x-data="Controller">
+    <div class="card w-100 m-0">
         <div class="card-body">
-        <h5 class="card-title">Controller</h5>
-        <p class="card-text vstack"
-           style="user-select: none;pointer-events: none;"
+        <h5 class="card-title m-0">Controller</h5>
+        <div class="card-text vstack"
            x-init="$el.addEventListener('touchstart touchmove touchend', function (e) {
                 e.preventDefault();
            })"
@@ -16,7 +15,7 @@
 {% include "widgets/controller.svg" %}
             </div>
             <div x-text="feedback"></div>
-        </p>
+        </div>
       </div>
     </div>
 </div>
