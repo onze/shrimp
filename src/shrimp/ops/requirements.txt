@@ -1,1 +1,8 @@
+munch
+pdbpp
+pyyaml
+flask~=2.3.2
+flask-socketio
+python-socketio~=5.8.0
+simple-websocket~=0.10.1
 gpiozero~=1.6.2

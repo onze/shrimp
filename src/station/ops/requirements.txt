@@ -1,5 +1,7 @@
-flask~=2.3.2
-pdbpp
 munch
+pdbpp
 pyyaml
+flask~=2.3.2
 flask-socketio
+simple-websocket~=0.10.1
+requests~=2.31.0

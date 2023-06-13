@@ -3,7 +3,7 @@ ROOT_DIR := $(abspath ${MKFILE_PATH}/..)
 
 SHELL:=bash
 
-PROJECT_NAME=shrimpstation
+PROJECT_NAME:=shrimpstation
 TARGET_DIR:=/home/onze/shrimpstation
 TARGET_HOST:=shrimpstation.local
 

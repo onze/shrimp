@@ -1,0 +1,14 @@
+tmp_dir: /tmp/shrimpstation
+server:
+  debug: true
+  hostname: onze-desktop.local
+  port: 5000
+  videofeed_port: 5001
+  websocket:
+    enable_logging: false
+    enable_engine_logging: false
+  subprocess_polling_period_ms: 250
+shrimp:
+  hostname: onze-desktop.local
+#  hostname: shrimp.local
+  rest_api_port: 6000

@@ -1,0 +1,10 @@
+tmp_dir: /tmp/shrimp
+server:
+  host: shrimp.local
+  port: 6000
+  websocket:
+    enable_logging: false
+    enable_engine_logging: false
+videofeed_out:
+  port: 6001
+  streaming_binary: libcamera-vid

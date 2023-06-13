@@ -1,0 +1,12 @@
+tmp_dir: /tmp/shrimp
+server:
+  debug: true
+  hostname: onze-desktop.local
+  port: 6000
+  websocket:
+    enable_logging: false
+    enable_engine_logging: false
+  subprocess_polling_period_ms: 250
+videofeed_out:
+  port: 6001
+  streaming_binary: ffmpeg

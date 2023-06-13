@@ -1,20 +1,20 @@
 <div class="hstack w-100 m-0" x-data="Controller">
     <div class="card w-100 m-0">
-        <div class="card-body">
-        <h5 class="card-title m-0" x-text="`Controller (${connectionStatus.text})`"></h5>
-        <div class="card-text vstack"
-           x-init="$el.addEventListener('touchstart touchmove touchend', function (e) {
-                e.preventDefault();
-           })"
-        >
-            <div
-                @press.window="mouseDown($event.detail);"
-                @release.window="mouseUp($event.detail);"
-                @reset.window="clearBuffer();"
+        <div class="card-body w-100">
+            <div class="card-text vstack w-100"
+               x-init="$el.addEventListener('touchstart touchmove touchend', function (e) {
+                    e.preventDefault();
+               })"
             >
-{% include "widgets/controller/controller.svg" %}
+                <div
+                    @press.window="mouseDown($event.detail);"
+                    @release.window="mouseUp($event.detail);"
+                    @reset.window="clearBuffer();"
+                >
+    {% include "widgets/controller/controller.svg" %}
             </div>
             <div x-text="feedback"></div>
+            <h5 class="card-title m-0" x-text="connectionStatus.text"></h5>
         </div>
       </div>
     </div>

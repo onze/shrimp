@@ -6,11 +6,14 @@
 
 {% include "headers.html" %}
 
+<script>{% include "base_lib.js" %}</script>
+<script>{% include "widgets/videofeed/videofeed.js" %}</script>
 <script>{% include "widgets/controller/controller.js" %}</script>
 
   </head>
   <body>
     <div x-data x-cloak x-show="true" class="vstack">
+{% include "widgets/videofeed/videofeed.html" %}
 {% include "widgets/controller/controller.html" %}
     </div>
 
