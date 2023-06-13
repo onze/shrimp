@@ -33,7 +33,7 @@ localdeploy:
 .ONESHELL:
 remoterun: pushfiles
 	source /tmp/${PROJECT_NAME}/venv/bin/activate
-	ssh $(TARGET_HOST) "cd $(TARGET_DIR) && amke localrun"
+	ssh $(TARGET_HOST) "cd $(TARGET_DIR) && make localrun"
 
 .ONESHELL:
 localrun:

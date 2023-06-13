@@ -3,6 +3,7 @@ ROOT_DIR := $(abspath ${MKFILE_PATH}/..)
 
 SHELL:=bash
 
+PROJECT_NAME:=shrimp
 TARGET_DIR:=/home/onze/shrimp
 TARGET_HOST:=shrimp.local
 
@@ -23,13 +24,18 @@ remotedeploy: pushfiles
 .ONESHELL:
 localdeploy:
 	cd $(ROOT_DIR)
-	rm -rf /tmp/venv
-	python3 -m venv /tmp/venv
-	source /tmp/venv/bin/activate
+	rm -rf /tmp/${PROJECT_NAME}/venv
+	python3 -m venv /tmp/${PROJECT_NAME}/venv
+	source /tmp/${PROJECT_NAME}/venv/bin/activate
 	pip install -r ./ops/requirements.txt
 
 # push code and run it - dev loop
 .ONESHELL:
 remoterun: pushfiles
-	source /tmp/venv/bin/activate
+	source /tmp/${PROJECT_NAME}/venv/bin/activate
+	ssh $(TARGET_HOST) "cd $(TARGET_DIR) && make localrun"
+
+.ONESHELL:
+localrun:
+	source /tmp/${PROJECT_NAME}/venv/bin/activate
 	python3 main.py
