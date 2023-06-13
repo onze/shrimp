@@ -1,7 +1,7 @@
 <div class="hstack w-100 m-0" x-data="Controller">
     <div class="card w-100 m-0">
         <div class="card-body">
-        <h5 class="card-title m-0">Controller</h5>
+        <h5 class="card-title m-0" x-text="`Controller (${connectionStatus.text})`"></h5>
         <div class="card-text vstack"
            x-init="$el.addEventListener('touchstart touchmove touchend', function (e) {
                 e.preventDefault();

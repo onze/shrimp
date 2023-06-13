@@ -15,11 +15,11 @@ class ControllerSocket {
     }
 
     onError(event) {
-        console.log(`Controller socket error`, event)
+        console.log(`Controller socket error:`, event)
     }
 
     onDisconnect(event) {
-        console.log(`Controller socket disconnected`, event)
+        console.log(`Controller socket disconnected:`, event)
     }
 
     onStatus(status) {
@@ -29,7 +29,6 @@ class ControllerSocket {
     sendCommands(rawCommands) {
         this.socketio.emit('commands', JSON.stringify(rawCommands))
     }
-
 }
 
 document.addEventListener('alpine:init', () => {
@@ -37,9 +36,14 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('Controller', () => ({
         buffer: Alpine.reactive({}),
         socket: new ControllerSocket(),
-        feedback: 'yep',
+        feedback: '<input feedback>',
+        connectionStatus: Alpine.reactive({text:''}),
         init(){
             setInterval(this.flushControllerBuffer, 1000./12, this)
+
+            this.socket.onConnect = (event) => {this.connectionStatus.text = 'connected'}
+            this.socket.onDisconnect = (event) => {this.connectionStatus.text = 'disconnected:' +event}
+            this.socket.onError = (event) => {this.connectionStatus.text = 'error: '+event}
             this.socket.connect()
         },
         mouseDown: function(btn) {
@@ -51,7 +55,7 @@ document.addEventListener('alpine:init', () => {
             delete this.buffer[btn]
         },
         clearBuffer(){
-        console.log(`clear buffer`)
+            console.log(`clear buffer`)
             Object.keys(this.buffer).forEach(key => delete this.buffer[key]);
         },
         flushControllerBuffer: function(_this) {
