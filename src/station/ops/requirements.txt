@@ -1,0 +1,5 @@
+flask~=2.3.2
+pdbpp
+munch
+pyyaml
+flask-socketio

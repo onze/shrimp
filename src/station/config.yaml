@@ -1,0 +1,7 @@
+server:
+  debug: true
+  hostname: 192.168.1.9
+  websocket:
+    port: 5001
+    enable_logging: false
+    enable_engine_logging: false

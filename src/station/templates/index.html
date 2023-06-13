@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% include "headers.html" %}
+
+<script>{% include "widgets/controller.js" %}</script>
+
+  </head>
+  <body>
+    <div x-data x-cloak x-show="true" class="vstack">
+{% include "widgets/controller.html" %}
+    </div>
+
+    <!--keep last-->
+{% include "noscript_failsafe.html" %}
+{% include "body_includes.html" %}
+  </body>
+</html>

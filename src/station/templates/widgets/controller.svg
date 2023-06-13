@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100"
+   height="75"
+   viewBox="0 0 100 75"
+   version="1.1"
+   id="svg5"
+   class="w-100 h-100"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="controller.svg"
+   inkscape:export-filename="controller.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="16.670419"
+     inkscape:cx="24.234544"
+     inkscape:cy="65.02536"
+     inkscape:window-width="1920"
+     inkscape:window-height="1007"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304953"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow-3"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304953"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow-2"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304953"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow-3-8"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304953"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367-6-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow-2-2"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304953"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367-9-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="RoundedArrow-3-8-6"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="RoundedArrow"
+       markerWidth="6.1347523"
+       markerHeight="5.9304953"
+       viewBox="0 0 6.1347524 5.9304951"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path1367-6-7-3" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="controllerForward"
+       label="forward"
+       onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onmousedown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       onmouseup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       style="fill:#83b9e3;fill-opacity:1"
+       transform="translate(-56.964471,-23.418992)">
+      <ellipse
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.753894"
+         id="path236"
+         cx="88.879112"
+         cy="42.587662"
+         rx="11.677993"
+         ry="11.677977" />
+      <path
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.947376;marker-start:url(#RoundedArrow)"
+         d="m 88.546895,40.406502 v 9.945371"
+         id="path1794" />
+    </g>
+    <g
+       id="controllerDown"
+       label="down"
+       onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onmousedown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       onmouseup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       transform="translate(-56.964471,-23.418992)">
+      <ellipse
+         style="fill:#2e86ca;fill-opacity:1;stroke:#000000;stroke-width:0.753894"
+         id="path236-5-2"
+         cx="-137.05495"
+         cy="-74.485443"
+         rx="11.677993"
+         ry="11.677977"
+         transform="scale(-1)" />
+      <path
+         style="fill:#2e86ca;fill-opacity:1;stroke:#000000;stroke-width:0.947376;marker-start:url(#RoundedArrow-3-8)"
+         d="M 136.76989,77.46338 V 67.518009"
+         id="path1794-3-0" />
+    </g>
+    <g
+       id="controllerUp"
+       label="up"
+       onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onmousedown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       onmouseup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       transform="rotate(180,108.59102,50.363295)"
+       style="fill:#d0e5f4;fill-opacity:1">
+      <ellipse
+         style="fill:#d0e5f4;fill-opacity:1;stroke:#000000;stroke-width:0.753894"
+         id="path236-5-2-0"
+         cx="-137.05495"
+         cy="-74.485443"
+         rx="11.677993"
+         ry="11.677977"
+         transform="scale(-1)" />
+      <path
+         style="fill:#d0e5f4;fill-opacity:1;stroke:#000000;stroke-width:0.947376;marker-start:url(#RoundedArrow-3-8-6)"
+         d="M 136.76989,77.46338 V 67.518009"
+         id="path1794-3-0-6" />
+    </g>
+    <g
+       id="controllerRight"
+       label="right"
+       onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onmousedown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       onmouseup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       style="fill:#83b9e3;fill-opacity:1"
+       transform="translate(-56.964471,-23.418992)">
+      <ellipse
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.753894"
+         id="path236-2"
+         cx="60.106342"
+         cy="-102.61648"
+         rx="11.677993"
+         ry="11.677977"
+         transform="rotate(90)" />
+      <path
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.947376;marker-start:url(#RoundedArrow-2)"
+         d="m 103.59544,57.346027 c -3.776691,2.740603 -4.346861,3.772645 -4.824931,8.348058"
+         id="path1794-7"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       id="controllerLeft"
+       style="fill:#83b9e3;fill-opacity:1"
+       label="left"
+       onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onmousedown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       onmouseup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       transform="translate(-56.964471,-23.418992)">
+      <ellipse
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.753894"
+         id="path236-2-5"
+         cx="59.7598"
+         cy="75.460304"
+         rx="11.677993"
+         ry="11.677977"
+         transform="matrix(0,1,1,0,0,0)" />
+      <path
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.947376;marker-start:url(#RoundedArrow-2-2)"
+         d="m 74.48134,56.999484 c 3.77669,2.740603 4.34686,3.772645 4.82493,8.348058"
+         id="path1794-7-9"
+         sodipodi:nodetypes="cc" />
+    </g>
+    <g
+       id="controllerBackward"
+       label="backward"
+       onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onmousedown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
+       onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       onmouseup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
+       style="fill:#83b9e3;fill-opacity:1"
+       transform="translate(-56.964471,-23.418992)">
+      <ellipse
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.753894"
+         id="path236-5"
+         cx="-88.397896"
+         cy="-77.397461"
+         rx="11.677993"
+         ry="11.677977"
+         transform="scale(-1)" />
+      <path
+         style="fill:#83b9e3;fill-opacity:1;stroke:#000000;stroke-width:0.947376;marker-start:url(#RoundedArrow-3)"
+         d="M 88.730111,79.578618 V 69.633247"
+         id="path1794-3" />
+    </g>
+    <g
+       id="controllerReset"
+       onclick="window.dispatchEvent(new CustomEvent('reset', {detail: this.getAttribute('label')}))"
+    >
+      <ellipse
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.488261"
+         id="path236-5-5"
+         cx="-7.7781644"
+         cy="-67.211205"
+         rx="7.563272"
+         ry="7.5632615"
+         transform="scale(-1)" />
+      <path
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.61228346;marker-start:;stroke-dasharray:none"
+         d="M 2.2646266,72.451501 12.768597,61.810061"
+         id="path1794-3-3"
+         sodipodi:nodetypes="cc" />
+    </g>
+  </g>
+</svg>
