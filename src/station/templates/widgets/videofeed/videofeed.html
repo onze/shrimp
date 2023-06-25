@@ -1,22 +1,19 @@
 <div class="hstack w-100 m-0" x-data="VideoFeed" x-init="startConnectionFlow()">
     <div class="card w-100 m-0">
-        <div class="card-body">
-<!--            <video-->
-<!--                id="videoStream"-->
-<!--                class="video-js"-->
-<!--                data-setup='{-->
-<!--                    "autoplay": "true",-->
-<!--                    "fluid": "true",-->
-<!--                    "preload": "auto",-->
-<!--                    "inactivityTimeout": "0",-->
-<!--                    "userActions": {-->
-<!--                        "doubleClick": "false"-->
-<!--                    }-->
-<!--                }'-->
-<!--            >-->
-<!--            </video>-->
-            <div>
-                <video id="jmuxer_videofeed" autoplay controls></video>
+        <div class="card-body p-0">
+            <div class="vstack">
+                <video id="jmuxer_videofeed" autoplay
+                       class="align-items-stretch justify-content-center w-100 h-100"
+                ></video>
+                <div id="videofeed_controls">
+                    <select class="form-select" x-model="videoSettings" @change="resetVideoFeed">
+                        <option>200x150@12</option>
+                        <option selected>400x300@24</option>
+                        <option>800x600@24</option>
+                        <option>1280x720@24</option>
+                        <option>1920x1080@24</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>

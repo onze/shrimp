@@ -20,7 +20,7 @@ def make_log_dir():
 
 
 if __name__ == '__main__':
-    logger.info('starting shrimp station...')
+    logger.info('starting shrimp...')
     silent_loggers()
     make_log_dir()
     import api

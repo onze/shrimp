@@ -23,4 +23,5 @@ def serve():
         host=config.server.hostname,
         port=config.server.port,
         debug=config.server.debug,
+        allow_unsafe_werkzeug=True,
     )

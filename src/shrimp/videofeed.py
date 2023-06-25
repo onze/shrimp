@@ -9,12 +9,13 @@ import config
 import api
 import subprocess
 import threading
+import typing
 
 # side process that does the streaming
 global streaming_process
-streaming_process: subprocess.Popen|None = None
+streaming_process: typing.Optional[subprocess.Popen] = None
 global healthcheck_thread
-healthcheck_thread: threading.Thread|None = None
+healthcheck_thread: typing.Optional[threading.Thread] = None
 
 
 def log_file():
@@ -40,7 +41,7 @@ def get_videofeed_start():
 
     try:
         os.system(f'/usr/bin/pkill {config.videofeed_out.streaming_binary}')
-    except: pass
+    except Exception: pass
 
     if config.videofeed_out.streaming_binary == 'libcamera-vid':
         bin_args = [
@@ -49,11 +50,15 @@ def get_videofeed_start():
             '-t', '0', # no timeout
             '--inline', # Force PPS/SPS header with every I frame (h264 only)
             '--listen', # Listen for an incoming client before sending data
-            '--info-text', '%fps fps', # Sets the information string on the titlebar.
+            #'--info-text', '%fps fps', # Sets the information string on the titlebar.
             '--width', str(width),
             '--height', str(height),
             '--framerate', str(fps),
-            #'--level', '4.2',
+            # https://en.wikipedia.org/wiki/Advanced_Video_Coding#Profiles
+            '--profile', 'main',
+            # not much freedom here
+            # https://github.com/raspberrypi/libcamera-apps/blob/e4b2a50359e2e95ece3b33f865707ddc5dde20fa/encoder/h264_encoder.cpp#L78
+            '--level', '4.2',
             '--flush', '1',
             '-o', f'tcp://0.0.0.0:{config.videofeed_out.port}'
         ]
@@ -81,7 +86,9 @@ def get_videofeed_start():
         stderr=open(err_file(), 'wt'),
         close_fds=True,
     )
-    logger.info(f'Running streamer relay: {" ".join(streaming_process.args)}')
+    logger.info(f'Running streamer: {" ".join(streaming_process.args)}')
+    # give leave it time to get ready
+    # time.sleep(1.)
 
     global healthcheck_thread
     healthcheck_thread = threading.Thread(target=healthcheck_streamer)
@@ -99,13 +106,14 @@ def healthcheck_streamer():
     while streaming_process is not None:
         rcode = streaming_process.poll()
         if rcode is not None:
+            logger.debug('Streamer relay terminated')
+            global healthcheck_thread
+            healthcheck_thread = None
+            stop_videofeed()
             with open(log_file(), 'r') as f:
                 logging.getLogger(__name__+'.streamer.out').info('\n'.join(f.readlines()))
             with open(err_file(), 'r') as f:
                 logging.getLogger(__name__+'.streamer.err').error('\n'.join(f.readlines()))
-            global healthcheck_thread
-            healthcheck_thread = None
-            stop_videofeed()
             break
         time.sleep(config.server.subprocess_polling_period_ms/1000.)
 
@@ -124,10 +132,11 @@ def stop_videofeed():
     streaming_process = None
     local_streaming_process.terminate()
     try:
-        local_streaming_process.wait(timeout=3)
-    except TimeoutError:
+        local_streaming_process.wait(timeout=1)
+    except subprocess.TimeoutExpired:
         local_streaming_process.kill()
     global healthcheck_thread
     if healthcheck_thread:
         healthcheck_thread.join()
         healthcheck_thread = None
+    logger.debug('streamer stopped')

@@ -15,10 +15,25 @@ document.addEventListener('alpine:init', () => {
             },
             debug: false
         }),
+        videoSettings: Alpine.$persist('400x300@24').as('videofeed.videoSettings'),
+        resetVideoFeed(){
+            this.stopStream()
+            this.startConnectionFlow()
+        },
+        stopStream(){
+            console.log('Stopping video feed...')
+            this.ws.close()
+        },
         startConnectionFlow(){
             let this_ = this
             console.log('Requesting a video feed url...')
-            Fetch.get('http://{{SERVER_URL}}/videofeed/start')
+
+            let vs = this.videoSettings
+            Fetch.get('http://{{SERVER_URL}}/videofeed/start', {
+                width: vs.slice(0, vs.indexOf('x')),
+                height: vs.slice(vs.indexOf('x')+1, vs.indexOf('@')),
+                fps: vs.slice(vs.indexOf('@')+1),
+            })
             .then((r)=>r.json())
             .then(function(data){
                 console.log('Got a video feed in on', data.videofeed_url, this_)

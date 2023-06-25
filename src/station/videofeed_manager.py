@@ -17,7 +17,15 @@ class VideoFeedManager:
     - remote shrimp's ffmpeg streamer
     - local websocat call to relay the stream
     '''
+
+    instance = None
+
     def __init__(self):
+        if VideoFeedManager.instance:
+            logger.debug('Stopping previous video feed manager...')
+            VideoFeedManager.instance.stop()
+            logger.debug('Stopped previous video feed manager...')
+        VideoFeedManager.instance = self
         self.websocat = None
         self.healthcheck_thread = None
 
@@ -28,16 +36,21 @@ class VideoFeedManager:
     def err_file(self):
         return f'{config.tmp_dir}/logs/websocat.err'
 
-    def start(self):
+    def start(self, width:int, height:int, fps: int, level:str):
         # get the shrimp to start streaming
         response: requests.Response = requests.get(
             f'http://{config.shrimp.hostname}:{config.shrimp.rest_api_port}/videofeed/start',
+            params=dict(width=width, height=height, fps=fps, level=level),
         )
         if not response.ok:
             raise Exception(f'{response.status_code}/{response.reason}')
         payload = munch.munchify(response.json())
         if payload.code != 0:
             raise Exception(f'Could not get camera stream up: {payload.reason}')
+
+        try:
+            os.system(f'/usr/bin/pkill websocat')
+        except: pass
 
         feed_hostname = payload.get('feed_hostname')
         feed_port = payload.get('feed_port')
@@ -48,14 +61,10 @@ class VideoFeedManager:
         feed_hostname = socket.gethostbyname(feed_hostname)
         feed_url = f'{feed_hostname}:{feed_port}'
 
-        try:
-            os.system(f'/usr/bin/pkill websocat')
-        except: pass
-
         # start websocat to wrap the stream in a websocket
         self.websocat = subprocess.Popen(
             [
-                'websocat',
+                '/home/onze/.local/bin/websocat',
                 '--oneshot', '-b',
                 f'ws-l:0.0.0.0:{config.server.videofeed_port}', # out
                 f'tcp:{feed_url}', # in
@@ -68,42 +77,61 @@ class VideoFeedManager:
             stderr=open(self.err_file, 'wt'),
             close_fds=True,
         )
-        logger.info(f'Running websocat relay: {" ".join(self.websocat.args)}')
+        logger.info(f'Started websocat relay: {" ".join(self.websocat.args)}')
+        # give it time to get ready
+        time.sleep(5.)
+
         self.websocket_url = f'ws://{config.server.hostname}:{config.server.videofeed_port}'
-        # TODO healthcheck thread that stops websocat whenever streaming has stopped
+        # healthcheck thread that stops websocat whenever streaming has stopped
         self.healthcheck_thread = threading.Thread(target=self.healthcheck_websocat)
         self.healthcheck_thread.start()
 
     def healthcheck_websocat(self):
         while self.websocat is not None:
-            rcode = self.websocat.poll()
+            try:
+                rcode = self.websocat.poll()
+            except Exception as e:
+                logger.error(f'While polling websocat:')
+                logger.exception(e)
+                break
+
             if rcode is not None:
+                logger.debug(f'websocat terminated ({rcode})')
+                self.healthcheck_thread = None
+                self.stop()
                 with open(self.log_file, 'r') as f:
                     logging.getLogger(__name__+'.websocat.out').info('\n'.join(f.readlines()))
                 with open(self.err_file, 'r') as f:
                     logging.getLogger(__name__+'.websocat.err').error('\n'.join(f.readlines()))
-                self.healthcheck_thread = None
-                self.stop()
                 break
+
             time.sleep(config.server.subprocess_polling_period_ms/1000.)
 
     def stop(self):
+        logger.info('Stopping original feed')
         try:
             requests.get(
-                f'{config.shrimp.hostname}:{config.shrimp.rest_api_port}/videofeed/stop',
+                f'http://{config.shrimp.hostname}:{config.shrimp.rest_api_port}/videofeed/stop',
             )
-        except: pass
+        except Exception as e:
+            logger.exception(e)
 
+        websocat = None
         if self.websocat:
             websocat = self.websocat
             self.websocat = None
             try:
+                logger.debug('terminating websocat...')
                 websocat.terminate()
-                websocat.wait(timeout=3)
-            except TimeoutError:
-                try:
-                    websocat.kill()
-                except: pass
+                websocat.wait(1)
+            except subprocess.TimeoutExpired as _:
+                websocat.kill()
+            except Exception as e:
+                logger.exception(e)
+
         if self.healthcheck_thread:
-            self.healthcheck_thread.join()
+            self.healthcheck_thread.join(timeout=3)
             self.healthcheck_thread = None
+        VideoFeedManager.instance = None
+        logger.debug('videofeed closed')
+

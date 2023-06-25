@@ -10,7 +10,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 THIS_DIR = os.path.dirname(__file__)
-template_folder=os.path.abspath(f'{THIS_DIR}/../templates')
+template_folder=os.path.abspath(f'{THIS_DIR}/templates')
 logger.debug(f'template_folder={template_folder}')
 
 app = flask.Flask('shrimp_station')
@@ -35,6 +35,7 @@ def serve():
         host=config.server.hostname,
         port=config.server.port,
         debug=config.server.debug,
+        allow_unsafe_werkzeug=True,
     )
 
 @app.route("/")
@@ -49,22 +50,16 @@ def get_root():
     )
 
 
-videofeed_managers = []
-
-
 @app.route('/videofeed/start')
 def get_videofeed_start():
-    while videofeed_managers:
-        try:
-            videofeed_managers.pop().stop()
-        except Exception as e:
-            logger.error(f'while stopping VideoFeedManager: {e}')
-
     vfm = videofeed_manager.VideoFeedManager()
     try:
-        vfm.start()
+        vfm.start(
+            width=flask.request.args.get('width', default=400, type=int),
+            height=flask.request.args.get('height', default=300, type=int),
+            fps=flask.request.args.get('fps', default=24, type=int),
+        )
     except Exception as e:
         logger.exception(e)
         return flask.jsonify(dict(code=1, error=str(e)))
-    videofeed_managers.append(vfm)
     return flask.jsonify(dict(code=0, videofeed_url=vfm.websocket_url))
