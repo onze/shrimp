@@ -158,6 +158,7 @@
      id="layer1">
     <g
        id="controllerForward"
+       x-ref="controllerForward"
        label="forward"
        onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
        onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
@@ -177,6 +178,7 @@
     </g>
     <g
        id="controllerDown"
+       x-ref="controllerDown"
        label="down"
        onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
        onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
@@ -196,6 +198,7 @@
     </g>
     <g
        id="controllerUp"
+       x-ref="controllerUp"
        label="up"
        onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
        onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
@@ -216,6 +219,7 @@
     </g>
     <g
        id="controllerRight"
+       x-ref="controllerRight"
        label="right"
        onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
        onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"
@@ -237,6 +241,7 @@
     </g>
     <g
        id="controllerLeft"
+       x-ref="controllerLeft"
        style="fill:#83b9e3;fill-opacity:1"
        label="left"
        onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
@@ -258,6 +263,7 @@
     </g>
     <g
        id="controllerBackward"
+       x-ref="controllerBackward"
        label="backward"
        onpointerdown="window.dispatchEvent(new CustomEvent('press', {detail: this.getAttribute('label')}))"
        onpointerup="window.dispatchEvent(new CustomEvent('release', {detail: this.getAttribute('label')}))"

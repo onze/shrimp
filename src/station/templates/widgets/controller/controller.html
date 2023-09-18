@@ -16,6 +16,42 @@
             </div>
             <div x-text="feedback"></div>
             <h5 class="card-title m-0" x-text="connectionStatus.text"></h5>
+            <div class="hstack">
+                <div class="input-group">
+                    <span class="input-group-text">Reverse</span>
+                    <div class="btn-group" role="group">
+<!--                        reverse checkbox for propulsion-->
+                        <input type="checkbox" class="btn-check" id="btn-reverse-propulsion" autocomplete="off"
+                               @change="swapElementLabels($refs.controllerForward, $refs.controllerBackward);"
+                            >
+                        <label class="btn btn-outline-primary" for="btn-reverse-propulsion"
+                               x-data="{isChecked:$persist(false).as('reverse-checked-propulsion')}"
+                               x-init="if(isChecked){$el.click()}"
+                               @click="isChecked=!isChecked"
+                        >Propulsion</label>
+
+<!--                        reverse checkbox for rotation-->
+                        <input type="checkbox" class="btn-check" id="btn-reverse-rotation" autocomplete="off"
+                               @change="swapElementLabels($refs.controllerLeft, $refs.controllerRight);"
+                        >
+                        <label class="btn btn-outline-primary" for="btn-reverse-rotation"
+                               x-data="{isChecked:$persist(false).as('reverse-checked-rotation')}"
+                               x-init="if(isChecked){$el.click()}"
+                               @click="isChecked=!isChecked"
+                        >Rotation</label>
+
+<!--                        reverse checkbox for depth-->
+                        <input type="checkbox" class="btn-check" id="btn-reverse-depth" autocomplete="off"
+                               @change="swapElementLabels($refs.controllerUp, $refs.controllerDown);"
+                        >
+                        <label class="btn btn-outline-primary" for="btn-reverse-depth"
+                               x-data="{isChecked:$persist(false).as('reverse-checked-depth')}"
+                               x-init="if(isChecked){$el.click()}"
+                               @click="isChecked=!isChecked"
+                        >Depth</label>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>

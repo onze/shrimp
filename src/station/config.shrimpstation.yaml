@@ -1,6 +1,6 @@
 tmp_dir: /tmp/shrimpstation
 server:
-  debug: false
+  debug: true
   hostname: shrimpstation.local
   port: 5000
   videofeed_port: 5001

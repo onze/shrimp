@@ -73,5 +73,10 @@ document.addEventListener('alpine:init', () => {
                 this.feedback = '-'
             }
         },
+        swapElementLabels: function(e0, e1) {
+            let save = e0.getAttribute('label');
+            e0.setAttribute('label', e1.getAttribute('label'));
+            e1.setAttribute('label', save);
+        }
     }))
 })
