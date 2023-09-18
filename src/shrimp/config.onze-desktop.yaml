@@ -10,3 +10,28 @@ server:
 videofeed_out:
   port: 6001
   streaming_binary: ffmpeg
+commander:
+  command_reset_delay_ms: 250
+engines:
+  propulsion:
+    # enable, phase
+    gpios: [6, 12]
+#  rotation:
+#    gpios: []
+#  vtrans:
+#    gpios: []
+commands:
+  forward:
+    auto_reset: true
+    actions:
+      - name: propulse
+        engine: propulsion
+        callback: forward
+        speed: 1
+  backward:
+    auto_reset: true
+    actions:
+      - name: retropulse
+        engine: propulsion
+        callback: backward
+        speed: 1

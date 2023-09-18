@@ -7,6 +7,7 @@ gets you a `config` object representing the root of that yaml file.
 '''
 import os
 import munch
+import pprint
 import yaml
 import socket
 import logging
@@ -19,4 +20,4 @@ with open(f'config.{socket.gethostname()}.yaml') as f:
 
 globals().update(config)
 
-logger.debug(f'Config: {config.toDict()}')
+logger.debug(f'Config: {pprint.pformat(config.toDict())}')

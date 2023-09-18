@@ -56,6 +56,7 @@ def get_videofeed_start():
             '--framerate', str(fps),
             # https://en.wikipedia.org/wiki/Advanced_Video_Coding#Profiles
             '--profile', 'main',
+            '--post-process-file', '/home/onze/annotate_cv.json',
             # not much freedom here
             # https://github.com/raspberrypi/libcamera-apps/blob/e4b2a50359e2e95ece3b33f865707ddc5dde20fa/encoder/h264_encoder.cpp#L78
             '--level', '4.2',

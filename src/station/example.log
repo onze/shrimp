@@ -1,6 +1,0 @@
-INFO:__main__:starting shrimp station...
-DEBUG:api:template_folder=/media/data/projects/2023/shrimp/src/templates
-DEBUG:config:Config: {'server': {'debug': True}}
-WARNING:werkzeug: * Debugger is active!
-INFO:werkzeug: * Debugger PIN: 152-304-267
-INFO:werkzeug: * Detected change in '/media/data/projects/2023/shrimp/src/station/main.py', reloading

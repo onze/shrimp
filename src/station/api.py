@@ -36,6 +36,7 @@ def serve():
         port=config.server.port,
         debug=config.server.debug,
         allow_unsafe_werkzeug=True,
+        use_reloader=False,
     )
 
 @app.route("/")

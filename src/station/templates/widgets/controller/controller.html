@@ -2,14 +2,15 @@
     <div class="card w-100 m-0">
         <div class="card-body w-100">
             <div class="card-text vstack w-100"
-               x-init="$el.addEventListener('touchstart touchmove touchend', function (e) {
+               x-init="$el.addEventListener('touchstart touchmove touchend contextmenu', function(e){
                     e.preventDefault();
-               })"
+               });"
             >
                 <div
                     @press.window="mouseDown($event.detail);"
                     @release.window="mouseUp($event.detail);"
                     @reset.window="clearBuffer();"
+                    style="user-select: none;"
                 >
     {% include "widgets/controller/controller.svg" %}
             </div>

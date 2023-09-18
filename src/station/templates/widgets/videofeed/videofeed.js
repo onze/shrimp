@@ -4,7 +4,7 @@ document.addEventListener('alpine:init', () => {
         jmuxer: new JMuxer({
             node: 'jmuxer_videofeed',
             mode: 'video',
-            flushingTime: 100,
+            flushingTime: 0,
             clearBuffer: true,
             //fps:
             onReady(){
@@ -29,13 +29,17 @@ document.addEventListener('alpine:init', () => {
             console.log('Requesting a video feed url...')
 
             let vs = this.videoSettings
-            Fetch.get('http://{{SERVER_URL}}/videofeed/start', {
+            let feedUrl = 'http://{{SERVER_URL}}/videofeed/start'
+            Fetch.get(feedUrl, {
                 width: vs.slice(0, vs.indexOf('x')),
                 height: vs.slice(vs.indexOf('x')+1, vs.indexOf('@')),
                 fps: vs.slice(vs.indexOf('@')+1),
             })
             .then((r)=>r.json())
             .then(function(data){
+                if(data.code!=0) {
+                    throw new Error(`While requesting a videofeed on ${feedUrl}: ${data.code}/${data.error}`)
+                }
                 console.log('Got a video feed in on', data.videofeed_url, this_)
                 this_.connectToVideoFeed(data.videofeed_url)
             })

@@ -33,10 +33,11 @@ localdeploy:
 	pip install -r ./ops/requirements.txt
 	# install websocat
 	mkdir -p ~/.local/bin
-	rm -rf ~/.local/bin/websocat.arm-unknown-linux-musleabi ~/.local/bin/websocat
-	wget https://github.com/vi/websocat/releases/download/v1.11.0/websocat.arm-unknown-linux-musleabi ~/.local/bin/websocat.1.11.0
-	chmod +x ~/.local/bin/websocat.1.11.0
-	ln -s ~/.local/bin/websocat.1.11.0 ~/.local/bin/websocat
+	cd ~/.local/bin
+	rm -rf ./websocat.arm-unknown-linux-musleabi ./websocat
+	wget https://github.com/vi/websocat/releases/download/v1.11.0/websocat.arm-unknown-linux-musleabi -O websocat.1.11.0
+	chmod +x ./websocat.1.11.0
+	ln -s `pwd`/websocat.1.11.0 `pwd`/websocat
 
 # push code and run it - dev loop
 .ONESHELL:

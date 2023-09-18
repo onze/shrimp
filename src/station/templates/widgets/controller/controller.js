@@ -39,8 +39,6 @@ document.addEventListener('alpine:init', () => {
         feedback: '<input feedback>',
         connectionStatus: Alpine.reactive({text:''}),
         init(){
-            setInterval(this.flushControllerBuffer, 1000./12, this)
-
             this.socket.onConnect = (event) => {this.connectionStatus.text = 'connected'}
             this.socket.onDisconnect = (event) => {this.connectionStatus.text = 'disconnected:' +event}
             this.socket.onError = (event) => {this.connectionStatus.text = 'error: '+event}
@@ -48,24 +46,31 @@ document.addEventListener('alpine:init', () => {
         },
         mouseDown: function(btn) {
             console.log(`mouseDown(${btn})`)
+            this.socket.sendCommands([btn])
             this.buffer[btn] = true
+            this.refreshOnScreenStatus()
         },
         mouseUp: function(btn) {
             console.log(`mouseUp(${btn})`)
+            this.socket.sendCommands([btn+'-stop'])
             delete this.buffer[btn]
+            this.refreshOnScreenStatus()
         },
         clearBuffer(){
             console.log(`clear buffer`)
-            Object.keys(this.buffer).forEach(key => delete this.buffer[key]);
+            Object.keys(this.buffer).forEach(key => {
+                this.socket.sendCommands([key+'-stop'])
+                delete this.buffer[key]
+            });
+            this.refreshOnScreenStatus()
         },
-        flushControllerBuffer: function(_this) {
-            let inputs = _.sortedUniq(Object.keys(_this.buffer))
+        refreshOnScreenStatus: function() {
+            let inputs = _.sortedUniq(Object.keys(this.buffer))
             if(inputs.length>0) {
                 console.log('inputs', inputs)
-                _this.socket.sendCommands(inputs)
-                _this.feedback = _.join(inputs, ',')
+                this.feedback = _.join(inputs, ',')
             } else {
-                _this.feedback = '-'
+                this.feedback = '-'
             }
         },
     }))

@@ -36,11 +36,11 @@ class VideoFeedManager:
     def err_file(self):
         return f'{config.tmp_dir}/logs/websocat.err'
 
-    def start(self, width:int, height:int, fps: int, level:str):
+    def start(self, width:int, height:int, fps: int):
         # get the shrimp to start streaming
         response: requests.Response = requests.get(
-            f'http://{config.shrimp.hostname}:{config.shrimp.rest_api_port}/videofeed/start',
-            params=dict(width=width, height=height, fps=fps, level=level),
+            f'http://{config.shrimp.hostname}:{config.shrimp.web_api_port}/videofeed/start',
+            params=dict(width=width, height=height, fps=fps),
         )
         if not response.ok:
             raise Exception(f'{response.status_code}/{response.reason}')
@@ -111,7 +111,7 @@ class VideoFeedManager:
         logger.info('Stopping original feed')
         try:
             requests.get(
-                f'http://{config.shrimp.hostname}:{config.shrimp.rest_api_port}/videofeed/stop',
+                f'http://{config.shrimp.hostname}:{config.shrimp.web_api_port}/videofeed/stop',
             )
         except Exception as e:
             logger.exception(e)

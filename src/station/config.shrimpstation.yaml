@@ -9,5 +9,5 @@ server:
     enable_engine_logging: false
   subprocess_polling_period_ms: 1000
 shrimp:
-  hostname: shrimp.local
-  rest_api_port: 6000
+  hostname: 10.0.0.2 #shrimp.local
+  web_api_port: 6000

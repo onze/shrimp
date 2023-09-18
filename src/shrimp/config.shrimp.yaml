@@ -1,7 +1,8 @@
 tmp_dir: /tmp/shrimp
 server:
   debug: true
-  hostname: shrimp.local
+  #shrimp.local
+  hostname: 10.0.0.2
   port: 6000
   websocket:
     enable_logging: false
@@ -10,3 +11,77 @@ server:
 videofeed_out:
   port: 6001
   streaming_binary: libcamera-vid
+commander:
+  command_reset_delay_ms: 500
+engines:
+  propulsion:
+    # phase, enable
+    gpios: [6, 12]
+  depth:
+    gpios: [16, 13]
+  rotation:
+    gpios: ['0', '1']
+commands:
+  # PROPULSION COMMANDS
+  forward:
+    actions:
+      - name: propulse
+        engine: propulsion
+        callback: forward
+        args:
+          speed: 1
+  forward-stop: &stop-propulsion-engine
+    actions:
+      - name: stop-propulsion-engine
+        engine: propulsion
+        callback: stop
+  backward:
+    actions:
+      - name: retropulse
+        engine: propulsion
+        callback: backward
+        args:
+          speed: 1
+  backward-stop: *stop-propulsion-engine
+  # DEPTH COMMANDS
+  up:
+    actions:
+      - name: rise
+        engine: depth
+        callback: forward
+        args:
+          speed: 1
+  up-stop: &stop-depth-engine
+    actions:
+      - name: stop-depth-engine
+        engine: depth
+        callback: stop
+  down:
+    actions:
+      - name: dive
+        engine: depth
+        callback: backward
+        args:
+          speed: 1
+  down-stop: *stop-depth-engine
+  # ROTATION COMMANDS
+  left:
+    actions:
+      - name: rotate left
+        engine: rotation
+        callback: forward
+        args:
+          speed: 1
+  left-stop: &stop-rotation-engine
+    actions:
+      - name: stop-rotation-engine
+        engine: rotation
+        callback: stop
+  right:
+    actions:
+      - name: rotate right
+        engine: rotation
+        callback: backward
+        args:
+          speed: 1
+  right-stop: *stop-rotation-engine
