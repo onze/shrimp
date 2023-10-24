@@ -15,12 +15,14 @@ commander:
   command_reset_delay_ms: 500
 engines:
   propulsion:
-    # phase, enable
+    # phase green, enable yellow
     gpios: [6, 12]
-  depth:
-    gpios: [16, 13]
   rotation:
-    gpios: ['0', '1']
+    # phase grey, enable white
+    gpios: [16, 19]
+  depth:
+    # phase green, enable blue
+    gpios: [20, 26]
 commands:
   # PROPULSION COMMANDS
   forward:

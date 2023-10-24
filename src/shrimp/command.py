@@ -13,8 +13,8 @@ class Command:
     by_name: typing.ClassVar[dict[str, 'Command']] = {}
 
     name: str
-    auto_reset: bool
     actions: list
+    auto_reset: bool = False
     _run: typing.Callable[[], None] = None
     _reset_timer: threading.Timer = None
     _auto_reset_actions: dict[str, typing.Callable[[], None]] = dataclasses.field(
@@ -39,20 +39,17 @@ class Command:
                         import pdb;pdb.set_trace()
                         action.is_running = False
                     try:
-                        engine: engine.Engine = engine.Engine.by_name.get(action.engine)
-                        if engine is None:
+                        eng: engine.Engine = engine.Engine.by_name.get(action.engine)
+                        if eng is None:
                             raise Exception(f'engine not found: {action.engine}')
-                        callback = getattr(engine.motor, action.callback, None)
-                        if callback is None:
-                            raise Exception(f'callback not found in engine {action.engine}: {action.callback}')
+
+                        eng.run_action(action.callback, **action.args)
 
                         def reset():
                             logger.debug(f'auto resetting command {self.name} / action {action.name}')
-                            engine.motor.stop()
+                            eng.stop()
                             action.is_running = False
 
-                        logger.debug(f'calling command {self.name} / action {action.name}: {action.engine}->{action.callback}(**{action.args.toDict()})')
-                        callback(**action.args)
                         action.is_running = True
                         auto_reset_actions[action.name] = reset
                     except Exception as e:
