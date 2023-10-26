@@ -26,6 +26,9 @@ class ControllerSocket {
       console.log("onStatus", status);
     }
 
+    emit(msg, data) {
+        this.socketio.emit(msg, data)
+    }
     sendCommands(rawCommands) {
         this.socketio.emit('commands', JSON.stringify(rawCommands))
     }
@@ -77,6 +80,25 @@ document.addEventListener('alpine:init', () => {
             let save = e0.getAttribute('label');
             e0.setAttribute('label', e1.getAttribute('label'));
             e1.setAttribute('label', save);
-        }
+        },
+        setEngineEnergyLimit: function(engine, limit) {
+            console.log('setEngineEnergyLimit', engine, limit)
+            this.socket.emit(
+                'set_engine_energy_limit',
+                {
+                    engine: engine,
+                    limit: limit,
+                }
+            )
+        },
+        resetEngineEnergyLimits: function(engine) {
+            console.log('resetEngineEnergyLimits', engine)
+            this.socket.emit(
+                'reset_engine_energy_limit',
+                {
+                    engine: engine,
+                }
+            )
+        },
     }))
 })

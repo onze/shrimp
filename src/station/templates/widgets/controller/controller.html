@@ -52,6 +52,23 @@
                     </div>
                 </div>
             </div>
+            <div class="hstack">
+                <div class="input-group ">
+                    <span class="input-group-text" id="basic-addon1">Calibrate Balast</span>
+                    <button type="button"
+                        class="btn btn-primary"
+                        @click="setEngineEnergyLimit('depth', 'min')"
+                    >Full / ⬇</button>
+                    <button type="button"
+                        class="btn btn-primary"
+                        @click="setEngineEnergyLimit('depth', 'max')"
+                    >Empty / ⬆</button>
+                    <button type="button"
+                        class="btn btn-primary"
+                        @click="resetEngineEnergyLimits('depth')"
+                    >Reset</button>
+                </div>
+            </div>
         </div>
       </div>
     </div>

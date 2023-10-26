@@ -53,6 +53,14 @@ class ControllerWebSocketServer(flask_socketio.Namespace):
         logger.info(f'relaying commands: {data}')
         self.shrimp_sio.emit('commands', data, namespace=self.shrimp_controller_ns)
 
+    def on_set_engine_energy_limit(self, data):
+        logger.info(f'relaying set_engine_energy_limit: {data}')
+        self.shrimp_sio.emit('set_engine_energy_limit', data, namespace=self.shrimp_controller_ns)
+
+    def on_reset_engine_energy_limit(self, data):
+        logger.info(f'relaying reset_engine_energy_limit: {data}')
+        self.shrimp_sio.emit('reset_engine_energy_limit', data, namespace=self.shrimp_controller_ns)
+
 
 def init(socketio_engine):
     socketio_engine.on_namespace(ControllerWebSocketServer('/ws/controller'))

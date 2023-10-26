@@ -34,10 +34,10 @@ localdeploy:
 	# install websocat
 	mkdir -p ~/.local/bin
 	cd ~/.local/bin
-	rm -rf ./websocat.arm-unknown-linux-musleabi ./websocat
-	wget https://github.com/vi/websocat/releases/download/v1.11.0/websocat.arm-unknown-linux-musleabi -O websocat.1.11.0
-	chmod +x ./websocat.1.11.0
-	ln -s `pwd`/websocat.1.11.0 `pwd`/websocat
+	rm -rf ./websocat
+	wget https://github.com/vi/websocat/releases/download/v1.12.0/websocat.x86_64-unknown-linux-musl -O websocat
+	#wget https://github.com/vi/websocat/releases/download/v1.11.0/websocat.arm-unknown-linux-musleabi -O websocat
+	chmod +x ./websocat
 
 # push code and run it - dev loop
 .ONESHELL:

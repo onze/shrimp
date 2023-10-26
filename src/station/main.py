@@ -19,7 +19,7 @@ def make_log_dir():
     os.makedirs(log_dir, exist_ok=True)
 
 
-if __name__ == '__main__':
+def main():
     logger.info('starting shrimp station...')
     silent_loggers()
     make_log_dir()
@@ -27,3 +27,7 @@ if __name__ == '__main__':
     import controller
     controller.init(api.socketio_engine)
     api.serve()
+
+
+if __name__ == '__main__':
+    main()

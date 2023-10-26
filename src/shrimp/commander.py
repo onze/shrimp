@@ -39,11 +39,31 @@ class ControllerWebSocketServer(flask_socketio.Namespace):
         except Exception as e:
             logger.error(f'while parsing commands {data}:')
             logger.exception(e)
-            commands_in = {}
-        # flask_socketio.emit('commands', data)
+            commands_in = []
         for command_in in commands_in:
             cmd = command.Command.by_name.get(command_in, lambda: None)
             cmd()
+
+    def on_set_engine_energy_limit(self, data):
+        engine_name = data.get('engine')
+        limit_name = data.get('limit')
+        if None in (engine_name, limit_name):
+            return logger.warning(f'Missing params in on_set_engine_energy_limit: {data}')
+        assert limit_name in ('min', 'max')
+        eng: engine.Engine = engine.Engine.by_name.get(engine_name)
+        logger.info(f'Setting {engine_name}.{limit_name}_energy = {eng.total_energy}')
+        setattr(eng, f'{limit_name}_energy', eng.total_energy)
+
+    def on_reset_engine_energy_limit(self, data):
+        engine_name = data.get('engine')
+        if None in (engine_name,):
+            return logger.warning(f'Missing params in reset_engine_energy_limit: {data}')
+        eng: engine.Engine = engine.Engine.by_name.get(engine_name)
+        logger.info(f'Resetting {engine_name} energy limits')
+        eng.min_energy = -float('inf')
+        eng.max_energy = float('inf')
+
+
 
 def init(socketio_engine):
     socketio_engine.on_namespace(ControllerWebSocketServer('/ws/controller'))
