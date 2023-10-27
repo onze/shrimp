@@ -9,6 +9,7 @@ import config
 def silent_loggers():
     for name in (
         'werkzeug',
+        'urllib3',
     ):
         logging.getLogger(name).setLevel(logging.WARNING)
 

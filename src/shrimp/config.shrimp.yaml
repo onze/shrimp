@@ -1,8 +1,9 @@
 tmp_dir: /tmp/shrimp
+persisted_dir: /home/onze/tmp/shrimp/persisted
 server:
   debug: true
-  #shrimp.local
-  hostname: 10.0.0.2
+  hostname: shrimp.local
+  #hostname: 10.0.0.2
   port: 6000
   websocket:
     enable_logging: false
@@ -17,12 +18,15 @@ engines:
   propulsion:
     # phase green, enable yellow
     gpios: [6, 12]
+    is_energy_bound: false
   rotation:
     # phase grey, enable white
     gpios: [16, 19]
+    is_energy_bound: false
   depth:
     # phase green, enable blue
     gpios: [20, 26]
+    is_energy_bound: true
 commands:
   # PROPULSION COMMANDS
   forward:

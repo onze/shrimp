@@ -18,6 +18,9 @@ with open(f'config.{socket.gethostname()}.yaml') as f:
     config = munch.Munch.fromDict(yaml.safe_load(f))
     assert config is not None
 
+os.makedirs(config.tmp_dir, exist_ok=True)
+os.makedirs(config.persisted_dir, exist_ok=True)
+
 globals().update(config)
 
 logger.debug(f'Config: {pprint.pformat(config.toDict())}')

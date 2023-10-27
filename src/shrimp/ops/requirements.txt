@@ -1,11 +1,12 @@
 munch
 pdbpp
 pyyaml
-flask~=2.3.2
+flask<3.0.0
 flask-socketio
-python-socketio~=5.8.0
+python-socketio<6.0.0
 python-socketio[client]
-simple-websocket~=0.10.1
-gpiozero~=1.6.2
-rpi.gpio~=0.7.1
+simple-websocket<1.0.0
+gpiozero<2.0.0
+rpi.gpio<1.0.0
 #pigpio~=1.78
+mergedeep<2.0.0

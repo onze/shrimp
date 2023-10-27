@@ -6,70 +6,90 @@
                     e.preventDefault();
                });"
             >
-                <div
-                    @press.window="mouseDown($event.detail);"
-                    @release.window="mouseUp($event.detail);"
-                    @reset.window="clearBuffer();"
-                    style="user-select: none;"
-                >
-    {% include "widgets/controller/controller.svg" %}
-            </div>
-            <div x-text="feedback"></div>
-            <h5 class="card-title m-0" x-text="connectionStatus.text"></h5>
-            <div class="hstack">
-                <div class="input-group">
-                    <span class="input-group-text">Reverse</span>
-                    <div class="btn-group" role="group">
-<!--                        reverse checkbox for propulsion-->
-                        <input type="checkbox" class="btn-check" id="btn-reverse-propulsion" autocomplete="off"
-                               @change="swapElementLabels($refs.controllerForward, $refs.controllerBackward);"
+                <div>
+                    <div
+                        class="w-100 hstack"
+                        @press.window="mouseDown($event.detail);"
+                        @release.window="mouseUp($event.detail);"
+                        @reset.window="clearBuffer();"
+                        style="user-select: none;"
+                    >
+{% include "widgets/controller/controller.svg" %}
+                        <progress
+                            class="position-absolute"
+                            style="
+                                right: -30%;
+                                top: 50%;
+                                -webkit-transform-origin: 0 100%;
+                                -webkit-transform: rotate(-90deg);
+                                -moz-transform-origin: 0 100%;
+                                -moz-transform: rotate(-90deg);
+                                -ms-transform-origin: 0 100%;
+                                -ms-transform: rotate(-90deg);
+                                transform-origin: 0 100%;
+                                transform: rotate(-90deg);
+                                "
+                                max="1"
+                                :value="depth_engine_energy_percentage.value">
+                        </progress>
+                    </div>
+                </div>
+                <div x-text="feedback"></div>
+                <h5 class="card-title m-0" x-text="connectionStatus.text"></h5>
+                <div class="hstack">
+                    <div class="input-group">
+                        <span class="input-group-text">Reverse</span>
+                        <div class="btn-group" role="group">
+    <!--                        reverse checkbox for propulsion-->
+                            <input type="checkbox" class="btn-check" id="btn-reverse-propulsion" autocomplete="off"
+                                   @change="swapElementLabels($refs.controllerForward, $refs.controllerBackward);"
+                                >
+                            <label class="btn btn-outline-primary" for="btn-reverse-propulsion"
+                                   x-data="{isChecked:$persist(false).as('reverse-checked-propulsion')}"
+                                   x-init="if(isChecked){$el.click()}"
+                                   @click="isChecked=!isChecked"
+                            >Propulsion</label>
+
+    <!--                        reverse checkbox for rotation-->
+                            <input type="checkbox" class="btn-check" id="btn-reverse-rotation" autocomplete="off"
+                                   @change="swapElementLabels($refs.controllerLeft, $refs.controllerRight);"
                             >
-                        <label class="btn btn-outline-primary" for="btn-reverse-propulsion"
-                               x-data="{isChecked:$persist(false).as('reverse-checked-propulsion')}"
-                               x-init="if(isChecked){$el.click()}"
-                               @click="isChecked=!isChecked"
-                        >Propulsion</label>
+                            <label class="btn btn-outline-primary" for="btn-reverse-rotation"
+                                   x-data="{isChecked:$persist(false).as('reverse-checked-rotation')}"
+                                   x-init="if(isChecked){$el.click()}"
+                                   @click="isChecked=!isChecked"
+                            >Rotation</label>
 
-<!--                        reverse checkbox for rotation-->
-                        <input type="checkbox" class="btn-check" id="btn-reverse-rotation" autocomplete="off"
-                               @change="swapElementLabels($refs.controllerLeft, $refs.controllerRight);"
-                        >
-                        <label class="btn btn-outline-primary" for="btn-reverse-rotation"
-                               x-data="{isChecked:$persist(false).as('reverse-checked-rotation')}"
-                               x-init="if(isChecked){$el.click()}"
-                               @click="isChecked=!isChecked"
-                        >Rotation</label>
-
-<!--                        reverse checkbox for depth-->
-                        <input type="checkbox" class="btn-check" id="btn-reverse-depth" autocomplete="off"
-                               @change="swapElementLabels($refs.controllerUp, $refs.controllerDown);"
-                        >
-                        <label class="btn btn-outline-primary" for="btn-reverse-depth"
-                               x-data="{isChecked:$persist(false).as('reverse-checked-depth')}"
-                               x-init="if(isChecked){$el.click()}"
-                               @click="isChecked=!isChecked"
-                        >Depth</label>
+    <!--                        reverse checkbox for depth-->
+                            <input type="checkbox" class="btn-check" id="btn-reverse-depth" autocomplete="off"
+                                   @change="swapElementLabels($refs.controllerUp, $refs.controllerDown);"
+                            >
+                            <label class="btn btn-outline-primary" for="btn-reverse-depth"
+                                   x-data="{isChecked:$persist(false).as('reverse-checked-depth')}"
+                                   x-init="if(isChecked){$el.click()}"
+                                   @click="isChecked=!isChecked"
+                            >Depth</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="hstack">
+                    <div class="input-group ">
+                        <span class="input-group-text" id="basic-addon1">Calibrate Balast</span>
+                        <button type="button"
+                            class="btn btn-primary"
+                            @click="setEngineEnergyLimit('depth', 'min')"
+                        >Full / ⬇</button>
+                        <button type="button"
+                            class="btn btn-primary"
+                            @click="setEngineEnergyLimit('depth', 'max')"
+                        >Empty / ⬆</button>
+                        <button type="button"
+                            class="btn btn-primary"
+                            @click="resetEngineEnergyLimits('depth')"
+                        >Reset</button>
                     </div>
                 </div>
             </div>
-            <div class="hstack">
-                <div class="input-group ">
-                    <span class="input-group-text" id="basic-addon1">Calibrate Balast</span>
-                    <button type="button"
-                        class="btn btn-primary"
-                        @click="setEngineEnergyLimit('depth', 'min')"
-                    >Full / ⬇</button>
-                    <button type="button"
-                        class="btn btn-primary"
-                        @click="setEngineEnergyLimit('depth', 'max')"
-                    >Empty / ⬆</button>
-                    <button type="button"
-                        class="btn btn-primary"
-                        @click="resetEngineEnergyLimits('depth')"
-                    >Reset</button>
-                </div>
-            </div>
         </div>
-      </div>
     </div>
 </div>

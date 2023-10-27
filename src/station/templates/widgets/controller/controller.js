@@ -23,14 +23,18 @@ class ControllerSocket {
     }
 
     onStatus(status) {
-      console.log("onStatus", status);
+        // overwritten by owner
+        console.log("onStatus", status);
     }
 
     emit(msg, data) {
         this.socketio.emit(msg, data)
     }
     sendCommands(rawCommands) {
-        this.socketio.emit('commands', JSON.stringify(rawCommands))
+        this.socketio.emit(
+            'commands',
+            JSON.stringify(rawCommands),
+        )
     }
 }
 
@@ -41,10 +45,12 @@ document.addEventListener('alpine:init', () => {
         socket: new ControllerSocket(),
         feedback: '<input feedback>',
         connectionStatus: Alpine.reactive({text:''}),
+        depth_engine_energy_percentage: Alpine.reactive({value: 0}),
         init(){
             this.socket.onConnect = (event) => {this.connectionStatus.text = 'connected'}
             this.socket.onDisconnect = (event) => {this.connectionStatus.text = 'disconnected:' +event}
             this.socket.onError = (event) => {this.connectionStatus.text = 'error: '+event}
+            this.socket.onStatus = (status) => {this.onStatus(status)}
             this.socket.connect()
         },
         mouseDown: function(btn) {
@@ -99,6 +105,18 @@ document.addEventListener('alpine:init', () => {
                     engine: engine,
                 }
             )
+        },
+        onStatus: function(status){
+            try{
+                let value = status.engines.depth.energy_percentage
+                if(isNaN(value)) {
+                    this.depth_engine_energy_percentage.value = 0
+                } else {
+                    this.depth_engine_energy_percentage.value = value
+                }
+            } catch(e){
+                console.error('Could not read depth engine energy from status', status, ':', e)
+            }
         },
     }))
 })

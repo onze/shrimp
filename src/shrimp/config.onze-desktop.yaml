@@ -1,4 +1,5 @@
 tmp_dir: /tmp/shrimp
+persisted_dir: /home/onze/tmp/shrimp/persisted
 server:
   debug: true
   hostname: onze-desktop.local
@@ -12,26 +13,80 @@ videofeed_out:
   streaming_binary: ffmpeg
 commander:
   command_reset_delay_ms: 250
-engines:
-  propulsion:
-    # enable, phase
-    gpios: [6, 12]
+engines: {}
+#  propulsion:
+#    # phase green, enable yellow
+#    gpios: [6, 12]
+#    is_energy_bound: false
 #  rotation:
-#    gpios: []
-#  vtrans:
-#    gpios: []
-commands:
-  forward:
-    auto_reset: true
-    actions:
-      - name: propulse
-        engine: propulsion
-        callback: forward
-        speed: 1
-  backward:
-    auto_reset: true
-    actions:
-      - name: retropulse
-        engine: propulsion
-        callback: backward
-        speed: 1
+#    # phase grey, enable white
+#    gpios: [16, 19]
+#    is_energy_bound: false
+#  depth:
+#    # phase green, enable blue
+#    gpios: [20, 26]
+#    is_energy_bound: true
+commands: {}
+#  # PROPULSION COMMANDS
+#  forward:
+#    actions:
+#      - name: propulse
+#        engine: propulsion
+#        callback: forward
+#        args:
+#          speed: 1
+#  forward-stop: &stop-propulsion-engine
+#    actions:
+#      - name: stop-propulsion-engine
+#        engine: propulsion
+#        callback: stop
+#  backward:
+#    actions:
+#      - name: retropulse
+#        engine: propulsion
+#        callback: backward
+#        args:
+#          speed: 1
+#  backward-stop: *stop-propulsion-engine
+#  # DEPTH COMMANDS
+#  up:
+#    actions:
+#      - name: rise
+#        engine: depth
+#        callback: forward
+#        args:
+#          speed: 1
+#  up-stop: &stop-depth-engine
+#    actions:
+#      - name: stop-depth-engine
+#        engine: depth
+#        callback: stop
+#  down:
+#    actions:
+#      - name: dive
+#        engine: depth
+#        callback: backward
+#        args:
+#          speed: 1
+#  down-stop: *stop-depth-engine
+#  # ROTATION COMMANDS
+#  left:
+#    actions:
+#      - name: rotate left
+#        engine: rotation
+#        callback: forward
+#        args:
+#          speed: 1
+#  left-stop: &stop-rotation-engine
+#    actions:
+#      - name: stop-rotation-engine
+#        engine: rotation
+#        callback: stop
+#  right:
+#    actions:
+#      - name: rotate right
+#        engine: rotation
+#        callback: backward
+#        args:
+#          speed: 1
+#  right-stop: *stop-rotation-engine
